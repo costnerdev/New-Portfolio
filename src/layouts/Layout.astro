@@ -1,3 +1,10 @@
+---
+import Outline from '@components/Outline.astro';
+import Cursor from '@components/Cursor'
+import '@fontsource/poppins';
+import CursorObserver from '@lib/cursor-observer';
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -5,18 +12,122 @@
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>Kevin Tan Portfolio</title>
 	</head>
 	<body>
-		<slot />
+			<main class="bg-[#e6e1da] text-[#060200] dark:bg-black dark:text-[#e6e1da] p-[32px] duration-700 ease">		
+				<CursorObserver client:load >
+						<slot />
+						<Cursor client:load />
+				</CursorObserver>
+			</main>
+		
+		<div class="bg">
+			<div class="noise__bg" />
+			<div class="noise__bg" />
+			<div class="noise__bg" />
+		</div>
+
+		<Outline />
 	</body>
 </html>
 
-<style>
+<style is:global>
+	@font-face {
+		font-family: 'GeneralSans';
+		src: url('/fonts/GeneralSans-Bold.otf') format('otf');
+		font-weight: Bold;
+		font-style: normal;
+	}
+
+	@font-face {
+		font-family: 'GeneralSans';
+		src: url('/fonts/GeneralSans-Medium.otf') format('otf');
+		font-weight: Medium;
+		font-style: normal;
+	}
+
+	@font-face {
+		font-family: 'GeneralSans';
+		src: url('/fonts/GeneralSans-Thin.otf') format('otf');
+		font-weight: Thin;
+		font-style: normal;
+	}
+
 	html,
 	body {
 		margin: 0;
 		width: 100%;
 		height: 100%;
+		font-family: 'Poppins', sans-serif;
+	}
+
+	.noise__bg {
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		left: 0;
+		top: 0;
+		pointer-events: none;
+		z-index: 20;
+	}
+
+	.noise__bg:after {
+		content: "";
+		width: calc(100% + 30rem);
+		height: calc(100% + 30rem);
+		background-position: 50%;
+		position: absolute;
+		left: -10rem;
+		top: -10rem;
+		background-image: url('../assets/noise.png');
+		will-change: transform;
+		-webkit-animation: bg-animation .2s infinite;
+		animation: bg-animation .2s infinite;
+	}
+
+	.line-mask {
+		position: absolute;
+		top: 0;
+		right: 0;
+		background-color: rgb(230 225 218 / var(--tw-bg-opacity));
+		opacity: .85;
+		height: 100%;
+		width: 100%;
+		transform-origin: right;
+		z-index: 2;
+		transition: .7s ease background-color;
+	}
+
+	.dark .line-mask {
+		background-color: #000;
+	}
+
+	.cursor {
+		z-index: 60;
+		width: 5px;
+		height: 5px;
+		padding: 0;
+		margin: 0;
+		top: 0;
+		left: 0;
+		border-radius: 50%;
+		pointer-events: none;
+		position: fixed;
+		transform: translate(-50%, -50%);  
+	}
+
+	@keyframes bg-animation {
+		0% { transform: translate(0,0) }
+		10% { transform: translate(-5%,-5%) }
+		20% { transform: translate(-10%,5%) }
+		30% { transform: translate(5%,-10%) }
+		40% { transform: translate(-5%,15%) }
+		50% { transform: translate(-10%,5%) }
+		60% { transform: translate(15%,0) }
+		70% { transform: translate(0,10%) }
+		80% { transform: translate(-15%,0) }
+		90% { transform: translate(10%,5%) }
+		100% { transform: translate(5%,0) }
 	}
 </style>
