@@ -9,7 +9,6 @@ const Cursor = () => {
 
 	useEffect(() => {
 		const mouseMove = (e: MouseEvent) => {
-			const target = e.target
 			// console.log(target)
 			setMousePosition({
 				x: e.clientX,
@@ -26,19 +25,18 @@ const Cursor = () => {
 
 	const variants = {
 		default: {
-			x: mousePosition.x - 3,
-			y: mousePosition.y - 3,
+			x: mousePosition.x,
+			y: mousePosition.y,
 		}
 	}
 
   return (
     <>
       <motion.div 
-        className='cursor bg-black outline outline-800 outline-offset-[10px] p-8 dark:bg-white dark:outline-white transition-colors duration-700 ease'
+        className='cursor bg-black outline outline-800 outline-offset-[1em] dark:bg-white dark:outline-white transition-colors duration-700 ease'
         variants={variants}	
         animate="default"
         transition={{  ease: "backOut" }}
-        style={{ backgroundColor: mousePosition.color }}
       />
     </>
   )

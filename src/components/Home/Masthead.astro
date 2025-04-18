@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import BannerImage from "../assets/main-banner.jpg";
+import BannerImageAlt from "../..//assets/main-banner-alt.jpg";
+---
+
+<section class="relative h-full w-full">
+    <div class="mx-auto">
+        <div class="pt-4 flex justify-start flex-col h-full">
+            <div class="px-16">
+                <h1 class="text-5xl pt-3 leading-tight font-bold text-center">Kev's Playground</h1>
+                <div class="pt-2 leading-normal flex justify-between relative gap-4">
+                    <h2 class="text-xl leading-tight font-bold between-element whitespace-nowrap">(a). Sunrise.</h2>
+                    <hr class="h-[2px] w-full mt-6 bg-black border-0 dark:bg-white">
+                    <h2 class="text-xl leading-tight font-bold between-element whitespace-nowrap">(b). Sunset.</h2>
+                </div>
+            </div>
+            <div class="overflow-hidden h-[65vh] pt-2">
+                <Image 
+                    src={ BannerImageAlt } 
+                    alt="Kevin Profile Picture" 
+                    class="object-cover object-fit w-full h-full opacity-80 dark:opacity-100 pt-4 duration-300 rellax" 
+                    />
+            </div>
+            <div class="px-8 pt-2 pb-4 text-center">
+                <p class="text-md font-medium">Header concept inspired by "What is?" on YouTube.</p>
+                <p class="text-sm font-medium pt-2">(c). Kevin Tan - Software Engineer</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    import Rellax from 'rellax';
+
+    const OPTIONS = {
+        center: true,
+        // horizontal:true,
+        // vertical: false,
+    }
+
+    const rellax = new Rellax('.rellax', OPTIONS);
+    // rellax.destroy();
+</script>
